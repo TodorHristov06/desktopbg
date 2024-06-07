@@ -5,8 +5,9 @@
 
 import scrapy
 
-
-class DesktopBgItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class ComputerConfigurationItem(scrapy.Item):
+    url = scrapy.Field()
+    processor = scrapy.Field()
+    gpu = scrapy.Field()
+    motherboard = scrapy.Field()
+    ram = scrapy.Field()
