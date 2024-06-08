@@ -34,11 +34,16 @@ class DesktopbgSpider(scrapy.Spider):
             '/html/body/div[2]/article/section[2]/table/tbody/tr[9]/td/div[1]/label/span[1]'
         ).get()
 
+        motherboard = motherboard.replace("<td>\n", "").replace("\n</td>", "") if motherboard else ""
+        processor = processor.replace("<td>\n", "").replace("\n</td>", "") if processor else ""
+        gpu = gpu.replace("<td>\n", "").replace("\n</td>", "") if gpu else ""
+        ram = ram.replace("<td>\n", "").replace("\n</td>", "").replace('<span>\n', '').replace('\n</span>', '') if ram else ""
+
         yield {
             'url': response.url,
-            'motherboard': motherboard.replace("<td>\n", "").replace("\n</td>", ""),
-            'processor': processor.replace("<td>\n", "").replace("\n</td>", ""),
-            'gpu': gpu.replace("<td>\n", "").replace("\n</td>", ""),
-            'ram': ram.replace("<td>\n", "").replace("\n</td>", "").replace('<span>\n', '').replace('\n</span>', '')
-        } 
+            'motherboard': motherboard,
+            'processor': processor,
+            'gpu': gpu,
+            'ram': ram
+        }
 
