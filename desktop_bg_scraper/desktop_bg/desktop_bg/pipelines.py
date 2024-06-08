@@ -36,7 +36,10 @@ class SQLitePipeline:
             spider.logger.error(f'Validation error: {e.message}')
             return item
 
-        self.cursor.execute('''
-            INSERT OR IGNORE INTO computers (processor, gpu, motherboard, ram) VALUES (?, ?, ?, ?)
-        ''', (item['processor'], item['gpu'], item['motherboard'], item['ram']))
+        self.cursor.execute('''INSERT OR IGNORE INTO computers (processor, gpu, motherboard, ram) VALUES (?, ?, ?, ?)''', (
+                item['processor'], 
+                item['gpu'], 
+                item['motherboard'], 
+                item['ram']
+            ))
         return item

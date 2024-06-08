@@ -3,7 +3,7 @@ import scrapy
 
 class DesktopbgSpider(scrapy.Spider):
     name = "desktopbg_spider"
-    start_urls = []
+    start_urls = ['https://desktop.bg/computers-all']
 
     def __init__(self, name: str | None = None, **kwargs: Any):
         for i in range(20):
@@ -28,7 +28,7 @@ class DesktopbgSpider(scrapy.Spider):
             '/html/body/div[2]/article/section[2]/table/tbody/tr[6]/td').get()
         processor = response.xpath(
             '/html/body/div[2]/article/section[2]/table/tbody/tr[7]/td').get()
-        video_card = response.xpath(
+        gpu = response.xpath(
             '/html/body/div[2]/article/section[2]/table/tbody/tr[8]/td').get()
         ram = response.xpath(
             '/html/body/div[2]/article/section[2]/table/tbody/tr[9]/td/div[1]/label/span[1]'
@@ -38,6 +38,7 @@ class DesktopbgSpider(scrapy.Spider):
             'url': response.url,
             'motherboard': motherboard.replace("<td>\n", "").replace("\n</td>", ""),
             'processor': processor.replace("<td>\n", "").replace("\n</td>", ""),
-            'video_card': video_card.replace("<td>\n", "").replace("\n</td>", ""),
+            'gpu': gpu.replace("<td>\n", "").replace("\n</td>", ""),
             'ram': ram.replace("<td>\n", "").replace("\n</td>", "").replace('<span>\n', '').replace('\n</span>', '')
-        }
+        } 
+
